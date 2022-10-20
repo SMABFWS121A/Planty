@@ -1,0 +1,49 @@
+Plant_Type
+(
+	id int (PK),
+	name varchar(50) (NN),
+	description varchar(256),
+	min_humidity_level int (NN)
+)
+
+Room
+(
+	id int (PK),
+	name varchar(50) (NN),
+	description varchar(256)
+)
+
+Sensor
+(
+	id int (PK),
+	name varchar(50) (NN),
+	description varchar(256),
+	humidity_scaling_from int (NN),
+	humidity_scaling_to int (NN),
+	last_calibration datetime,
+	sleep_timeout int (NN, D: 240)
+)
+
+Plant
+(
+	id int (PK),
+	name varchar(50) (NN),
+	description varchar(256),
+	plant_type_id int (FK, NN),
+	sensor_id int (FK, NN, U),
+	room_id (FK)
+)
+
+Moisture_Record
+(
+	id int (PK),
+	timestamp datetime (NN),
+	humidity_level int (NN),
+	plant_id int (FK, NN)
+)
+
+PK = Primary Key, includes U and NN
+FK = Foreign Key
+U = Unique
+NN = Not Null
+D: <value> = Default value

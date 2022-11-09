@@ -1,0 +1,335 @@
+openapi: 3.1.0
+info:
+  title: "Planty API"
+  description: "API for communication between frontend, microcontroller and backend."
+  version: 0.0.1
+paths:
+  # Moisture Record endpoint
+  /moistureRecord:
+    get:
+      summary: "Get all moisture records."
+      description: "Retrieves all available moisture records."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/moistureRecords"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    post:
+      summary: "Post a moisture record."
+      description: "Create a new moisture record."
+      requestBody:
+        description: "The moisture record to be created."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/moistureRecordPayload"
+      responses:
+        "201":
+          description: "OK"
+        "400":
+          description: "The given moisture record was invalid."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  /moistureRecord/{moistureRecordId}:
+    get:
+      summary: "Get a single moisture record."
+      description: "Retrieves a single moisture record based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/moistureRecord"
+        "404":
+          description: "No moisture record with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  # Plant Type endpoint
+  /plantType:
+    get:
+      summary: "Get all plant types."
+      description: "Retrieves all available plant types."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/plantTypes"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    post:
+      summary: "Post a plant type."
+      description: "Create a new plant type."
+      requestBody:
+        description: "The plant type to be created."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plantTypePayload"
+      responses:
+        "201":
+          description: "OK"
+        "400":
+          description: "The given plant type was invalid."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  /plantType/{plantTypeId}:
+    get:
+      summary: "Get a single plant type."
+      description: "Retrieves a single plant type based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/plantType"
+        "404":
+          description: "No plant type with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  # Sensor endpoint
+  /sensor:
+    get:
+      summary: "Get all sensors."
+      description: "Retrieves all available sensors."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sensors"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    post:
+      summary: "Post a sensor."
+      description: "Create a new sensor."
+      requestBody:
+        description: "The sensor to be created."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/sensorPayload"
+      responses:
+        "201":
+          description: "OK"
+        "400":
+          description: "The given sensor was invalid."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  /sensor/{sensorId}:
+    get:
+      summary: "Get a single sensor."
+      description: "Retrieves a single sensor based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sensor"
+        "404":
+          description: "No sensor with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+components:
+  schemas:
+    # Entity-related schemas
+    errorMessage:
+      description: "A json object containing a text message describing an error."
+      type: object
+      properties:
+        message:
+          description: "A message describing an error."
+          type: string
+          maxLength: 256
+          example: "The database is not responding."
+      example: '{ "message": "The database is not responding." }'
+    entityId:
+      description: "The ID schema used for most database entities."
+      type: integer
+      minimum: 0
+      example: 420
+    entityName:
+      description: "A name of an entity"
+      type: string
+      maxLength: 50
+      example: "Sensor 1"
+    entityDescription:
+      description: "A description of an entity"
+      type: string
+      maxLength: 50
+      example: "The blue ESP32 sensor"
+    # Basic schemas
+    timestamp:
+      description: "A timestamp containing date and time."
+      type: string
+      format: date-time
+    humidityLevel:
+      description: "Humidity level reported by a sensor scaled from 0 to 100."
+      type: integer
+      minimum: 0
+      maximum: 100
+      example: 69
+    # Moisture Record schemas
+    moistureRecord:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/entityId"
+        timestamp:
+          $ref: "#/components/schemas/timestamp"
+        humidityLevel:
+          $ref: "#/components/schemas/humidityLevel"
+        plantId:
+          $ref: "#/components/schemas/entityId"
+    moistureRecords:
+      type: array
+      items:
+        $ref: "#/components/schemas/moistureRecord"
+    moistureRecordPayload:
+      type: object
+      properties:
+        humidityLevel:
+          $ref: "#/components/schemas/humidityLevel"
+    # Plant Type schemas
+    plantType:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/entityId"
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
+        minHumidityLevel:
+          $ref: "#/components/schemas/humidityLevel"
+    plantTypes:
+      type: array
+      items:
+        $ref: "#/components/schemas/plantType"
+    plantTypePayload:
+      type: object
+      properties:
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
+        minHumidityLevel:
+          $ref: "#/components/schemas/humidityLevel"
+    # Sensor schemas
+    sensorSleepTimeout:
+      description: "Timeout in minutes for the sensor to sleep in between taking measurements"
+      type: integer
+    sensorHumidityScalingFrom:
+      description: "The minimum value used for scaling the raw sensor values."
+      type: integer
+    sensorHumidityScalingTo:
+      description: "The maximum value used for scaling the raw sensor values."
+      type: integer
+    sensor:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/entityId"
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
+        humidityScalingFrom:
+          $ref: "#/components/schemas/sensorHumidityScalingFrom"
+        humidityScalingTo:
+          $ref: "#/components/schemas/sensorHumidityScalingTo"
+        lastCalibration:
+          $ref: "#/components/schemas/timestamp"
+        sleepTimeout:
+          $ref: "#/components/schemas/sensorSleepTimeout"
+    sensors:
+      type: array
+      items:
+        $ref: "#/components/schemas/sensor"
+    sensorPayload:
+      type: object
+      properties:
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
+    sensorConfigurationPayload:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/entityId"
+        humidityScalingFrom:
+          $ref: "#/components/schemas/sensorHumidityScalingFrom"
+        humidityScalingTo:
+          $ref: "#/components/schemas/sensorHumidityScalingTo"
+        sleepTimeout:
+          $ref: "#/components/schemas/sensorSleepTimeout"

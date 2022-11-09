@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: "Planty API"
   description: "API for communication between frontend, microcontroller and backend."
-  version: 0.0.1
+  version: 0.0.2
 paths:
   # Moisture Record endpoint
   /moistureRecord:
@@ -59,6 +59,107 @@ paths:
                 $ref: "#/components/schemas/moistureRecord"
         "404":
           description: "No moisture record with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    delete:
+      summary: "Delete a single moisture record."
+      description: "Deletes a single moisture record based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "No moisture record with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  # Plant endpoint
+  /plant:
+    get:
+      summary: "Get all plants."
+      description: "Retrieves all available plants."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/plants"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    post:
+      summary: "Post a plant."
+      description: "Create a new plant."
+      requestBody:
+        description: "The plant to be created."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plantPayload"
+      responses:
+        "201":
+          description: "OK"
+        "400":
+          description: "The given plant was invalid."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  /plant/{plantId}:
+    get:
+      summary: "Get a single plant."
+      description: "Retrieves a single plant based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/plant"
+        "404":
+          description: "No plant with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    delete:
+      summary: "Delete a single plant."
+      description: "Deletes a single plant based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "No plant with the given ID was found."
           content:
             application/json:
               schema:
@@ -134,6 +235,107 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+    delete:
+      summary: "Delete a single plant type."
+      description: "Deletes a single plant type based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "No plant type with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  # Room endpoint
+  /room:
+    get:
+      summary: "Get all rooms."
+      description: "Retrieves all available rooms."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/rooms"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    post:
+      summary: "Post a room."
+      description: "Create a new room."
+      requestBody:
+        description: "The room be created."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/roomPayload"
+      responses:
+        "201":
+          description: "OK"
+        "400":
+          description: "The given room was invalid."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+  /room/{roomId}:
+    get:
+      summary: "Get a single room."
+      description: "Retrieves a single room based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/room"
+        "404":
+          description: "No room with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    delete:
+      summary: "Delete a single plant type."
+      description: "Deletes a single room based on a given ID."
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "No room with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
   # Sensor endpoint
   /sensor:
     get:
@@ -187,6 +389,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/sensor"
+        "404":
+          description: "No sensor with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+    delete:
+      summary: "Delete a single sensor."
+      description: "Deletes a single sensor based on a given ID."
+      responses:
+        "200":
+          description: "OK"
         "404":
           description: "No sensor with the given ID was found."
           content:
@@ -259,6 +479,39 @@ components:
       properties:
         humidityLevel:
           $ref: "#/components/schemas/humidityLevel"
+    # Plant schemas
+    plant:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/entityId"
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
+        plantTypeId:
+          $ref: "#/components/schemas/entityId"
+        sensorId:
+          $ref: "#/components/schemas/entityId"
+        roomId:
+          $ref: "#/components/schemas/entityId"
+    plants:
+      type: array
+      items:
+        $ref: "#/components/schemas/plant"
+    plantPayload:
+      type: object
+      properties:
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
+        plantTypeId:
+          $ref: "#/components/schemas/entityId"
+        sensorId:
+          $ref: "#/components/schemas/entityId"
+        roomId:
+          $ref: "#/components/schemas/entityId"
     # Plant Type schemas
     plantType:
       type: object
@@ -284,6 +537,27 @@ components:
           $ref: "#/components/schemas/entityDescription"
         minHumidityLevel:
           $ref: "#/components/schemas/humidityLevel"
+    # Room schemas
+    room:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/entityId"
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
+    rooms:
+      type: array
+      items:
+        $ref: "#/components/schemas/room"
+    roomPayload:
+      type: object
+      properties:
+        name:
+          $ref: "#/components/schemas/entityName"
+        description:
+          $ref: "#/components/schemas/entityDescription"
     # Sensor schemas
     sensorSleepTimeout:
       description: "Timeout in minutes for the sensor to sleep in between taking measurements"

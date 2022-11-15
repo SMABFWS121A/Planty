@@ -419,6 +419,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+    put:
+      summary: "Put a single sensor."
+      description: "Updates a sensors configuration."
+      requestBody:
+        description: "The new sensor configuration."
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/sensorConfigurationPayload"
+      responses:
+        "201":
+          description: "OK"
+        "400":
+          description: "The given sensor was invalid."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "404":
+          description: "No sensor with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
 components:
   schemas:
     # Entity-related schemas
@@ -599,8 +629,6 @@ components:
     sensorConfigurationPayload:
       type: object
       properties:
-        id:
-          $ref: "#/components/schemas/entityId"
         humidityScalingFrom:
           $ref: "#/components/schemas/sensorHumidityScalingFrom"
         humidityScalingTo:

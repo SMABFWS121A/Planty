@@ -12,6 +12,16 @@ import { CategoryManagementComponent } from './components/category-management/ca
 import { SensorManagementComponent } from './components/sensor-management/sensor-management.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { DropdownComponent } from './components/molecules/dropdown/dropdown.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input';
+import { MangementFormComponent } from './components/mangement-form/mangement-form.component';
+import { ManagementTableComponent } from './components/management-table/management-table.component';
+import {MatTableModule} from "@angular/material/table";
+
+
 
 @NgModule({
   declarations: [
@@ -24,13 +34,23 @@ import { DropdownComponent } from './components/molecules/dropdown/dropdown.comp
     CategoryManagementComponent,
     SensorManagementComponent,
     SettingsComponent,
-    DropdownComponent
+    DropdownComponent,
+    MangementFormComponent,
+    ManagementTableComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

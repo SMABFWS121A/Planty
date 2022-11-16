@@ -1,0 +1,83 @@
+<div class="grid grid-cols-5 gap-1 px-10 py-8">
+  <div class="m-3">
+    <div class="flex justify-center pl-3">
+      <div class="mb-3 xl:w-96 ">
+        <label
+          for="exampleFormControlInput1"
+          class="form-label inline-block mb-2 text-gray-700"
+        >Name</label
+        >
+        <input
+          type="text"
+          class="form-control block w-full px-3 py-3 mt-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          id="exampleFormControlInput1"
+          placeholder="Name"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="m-3">
+    <div class="flex justify-center pl-3">
+      <div class="mb-3 xl:w-96">
+        <label
+          for="exampleFormControlInput1"
+          class="form-label inline-block mb-2 text-gray-700"
+        >{{description}}</label
+        >
+        <input
+          type="text"
+          class="form-control block w-full px-3 py-3 mt-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          id="exampleFormControlInput1"
+          placeholder={{description}}
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="m-3 {{visibility}}">
+    <label
+      for="exampleFormControlInput1"
+      class="form-label inline-block mb-2 text-gray-700 "
+    >Category</label
+    >
+
+    <div>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Selected Category</mat-label>
+        <mat-select [formControl]="selectedFW">
+          <mat-option *ngFor="let categorie of categories" [value]="categorie">
+            {{ categorie }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+
+  <div class="m-3 {{visibility}}">
+    <label
+      for="exampleFormControlInput1"
+      class="form-label inline-block mb-2 text-gray-700"
+    >Sensor</label
+    >
+    <div>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Selected Sensor</mat-label>
+        <mat-select [formControl]="selectedFW">
+          <mat-option *ngFor="let sensor of sensors" [value]="sensor">
+            {{ sensor }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="m-3">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-20 py-4 mt-8 ml-10"
+    >
+      Add {{menuetype}}
+    </button>
+  </div>
+</div>

@@ -20,6 +20,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MangementFormComponent } from './components/mangement-form/mangement-form.component';
 import { ManagementTableComponent } from './components/management-table/management-table.component';
 import {MatTableModule} from "@angular/material/table";
+import { HttpClientModule } from '@angular/common/http';
+import {GitHubService} from "./components/management-table/api.service";
 
 
 
@@ -40,6 +42,7 @@ import {MatTableModule} from "@angular/material/table";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -49,7 +52,7 @@ import {MatTableModule} from "@angular/material/table";
     MatSelectModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [GitHubService],
   bootstrap: [AppComponent]
 })
 

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { GitHubService } from './api.service';
-import { repos } from './repos';
+import { GitHubService } from '../../services/api.service';
+import { repos } from '../../models/repos';
 
 export interface PeriodicElement {
   name: string;

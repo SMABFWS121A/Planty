@@ -21,7 +21,7 @@ import { MangementFormComponent } from './components/mangement-form/mangement-fo
 import { ManagementTableComponent } from './components/management-table/management-table.component';
 import {MatTableModule} from "@angular/material/table";
 import { HttpClientModule } from '@angular/common/http';
-import {GitHubService} from "./components/management-table/api.service";
+import {GitHubService} from "./services/api.service";
 
 
 

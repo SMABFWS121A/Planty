@@ -1,4 +1,12 @@
 #!/bin/bash
+WD=$(PWD)
+echo "$WD"
+if [[ ! "$WD" == *"/openapi" ]]
+then
+    echo "You must be inside the /openapi directory to run this script."
+    exit
+fi
+
 mkdir -p ./bin
 curl https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/bin/utils/openapi-generator-cli.sh > ./bin/openapi-generator.sh
 chmod u+x ./bin/openapi-generator.sh

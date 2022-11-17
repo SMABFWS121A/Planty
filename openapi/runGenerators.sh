@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Checks
 WD=$(pwd)
 echo "$WD"
 if [[ ! "$WD" == *"/openapi" ]]
@@ -7,24 +9,34 @@ then
     exit
 fi
 
+# Setup
 mkdir -p ./bin
 curl https://raw.githubusercontent.com/OpenAPITools/openapi-generator/master/bin/utils/openapi-generator-cli.sh > ./bin/openapi-generator.sh
 chmod u+x ./bin/openapi-generator.sh
 
+# Cleanup
 rm -rf ./.backend/* ./.frontend/*
 mkdir -p ./.backend ./.frontend
 
-bin/openapi-generator.sh generate -i openapi.yaml -g jaxrs-spec --package-name "de.planty.gen" --api-package "de.planty.gen.api" --model-package "de.planty.gen.model" --model-name-prefix "Gen" -o ./.backend
+# Generating backend
+echo '{ "hideGenerationTimestamp": true }"' > ./config.json
+bin/openapi-generator.sh generate -i openapi.yaml -g jaxrs-spec --package-name "de.planty.gen" --api-package "de.planty.gen.api" --model-package "de.planty.gen.model" --model-name-prefix "Gen" -c ./config.json -o ./.backend
+rm ./config.json
+
+# Generating frontend
 bin/openapi-generator.sh generate -i openapi.yaml -g typescript-angular --type-mappings "DateTime=Date" -o ./.frontend
 
+# Copying to backend
 rm -rf ../backend/src/main/java/de/planty/gen
 mkdir -p ../backend/src/main/java/de/planty/gen
 cp -r ./.backend/src/gen/java/de/planty/gen/* ../backend/src/main/java/de/planty/gen
 
+# Copying to frontend
 rm -rf ../frontend/src/assets/ts-api-client
 mkdir -p ../frontend/src/assets/ts-api-client
 cp ./.frontend/*.ts ../frontend/src/assets/ts-api-client
 cp -r ./.frontend/api ../frontend/src/assets/ts-api-client
 cp -r ./.frontend/model ../frontend/src/assets/ts-api-client
 
+# Cleanup
 rm -rf ./.backend ./.frontend

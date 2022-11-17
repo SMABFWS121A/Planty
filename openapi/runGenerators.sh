@@ -1,5 +1,5 @@
 #!/bin/bash
-WD=$(PWD)
+WD=$(pwd)
 echo "$WD"
 if [[ ! "$WD" == *"/openapi" ]]
 then
@@ -17,9 +17,11 @@ mkdir -p ./.backend ./.frontend
 bin/openapi-generator.sh generate -i openapi.yaml -g jaxrs-spec --package-name "de.planty.gen" --api-package "de.planty.gen.api" --model-package "de.planty.gen.model" --model-name-prefix "Gen" -o ./.backend
 bin/openapi-generator.sh generate -i openapi.yaml -g typescript-angular --type-mappings "DateTime=Date" -o ./.frontend
 
+rm -rf ../backend/src/main/java/de/planty/gen
 mkdir -p ../backend/src/main/java/de/planty/gen
 cp -r ./.backend/src/gen/java/de/planty/gen/* ../backend/src/main/java/de/planty/gen
 
+rm -rf ../frontend/src/assets/ts-api-client
 mkdir -p ../frontend/src/assets/ts-api-client
 cp ./.frontend/*.ts ../frontend/src/assets/ts-api-client
 cp -r ./.frontend/api ../frontend/src/assets/ts-api-client

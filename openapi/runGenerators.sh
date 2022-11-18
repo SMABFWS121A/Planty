@@ -2,7 +2,6 @@
 
 # Checks
 WD=$(pwd)
-echo "$WD"
 if [[ ! "$WD" == *"/openapi" ]]
 then
     echo "You must be inside the /openapi directory to run this script."

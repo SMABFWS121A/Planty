@@ -1,0 +1,9 @@
+{
+    "plant1Data": [
+      { "date": "14.03.2022", "moistureLevel": 3 },
+      { "date": "14.04.2022", "moistureLevel": 2 },
+      { "date": "04.05.2022", "moistureLevel": 1 },
+      { "date": "14.05.2022", "moistureLevel": 10 },
+      { "date": "14.06.2022", "moistureLevel": 7 }
+    ]
+  }

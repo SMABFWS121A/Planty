@@ -14,16 +14,15 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { DropdownComponent } from './components/molecules/dropdown/dropdown.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select'
-import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MangementFormComponent } from './components/mangement-form/mangement-form.component';
 import { ManagementTableComponent } from './components/management-table/management-table.component';
-import {MatTableModule} from "@angular/material/table";
+import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
-import {GitHubService} from "./services/api.service";
-
-
+import { ApiService } from './services/api.service';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +37,8 @@ import {GitHubService} from "./services/api.service";
     SettingsComponent,
     DropdownComponent,
     MangementFormComponent,
-    ManagementTableComponent
+    ManagementTableComponent,
+    LineChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,10 +50,9 @@ import {GitHubService} from "./services/api.service";
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
   ],
-  providers: [GitHubService],
-  bootstrap: [AppComponent]
+  providers: [ApiService],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

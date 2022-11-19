@@ -18,55 +18,43 @@ import javax.validation.Valid;
 @Path("/plantType")
 @Api(description = "the plantType API")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen")
-public class PlantTypeApi {
+public interface PlantTypeApi {
 
     @GET
     @Produces({ "application/json" })
-    @ApiOperation(value = "Get all plant types.", notes = "Retrieves all available plant types.", response = GenPlantType.class, responseContainer = "List", tags={  })
+    @ApiOperation(value = "Get all plant types.", notes = "Retrieves all available plant types.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = GenPlantType.class, responseContainer = "List"),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response plantTypeGet() {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class, responseContainer = "List") })
+    List<GenPlantType> plantTypeGet();
 
     @DELETE
     @Path("/{plantTypeId}")
     @Produces({ "application/json" })
-    @ApiOperation(value = "Delete a single plant type.", notes = "Deletes a single plant type based on a given ID.", response = Void.class, tags={  })
+    @ApiOperation(value = "Delete a single plant type.", notes = "Deletes a single plant type based on a given ID.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = Void.class),
         @ApiResponse(code = 404, message = "No plant type with the given ID was found.", response = GenErrorMessage.class),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response plantTypePlantTypeIdDelete(@PathParam("plantTypeId") @ApiParam("ID of the plant type to access.") String plantTypeId) {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class) })
+    void plantTypePlantTypeIdDelete(@PathParam("plantTypeId") @ApiParam("ID of the plant type to access.") String plantTypeId);
 
     @GET
     @Path("/{plantTypeId}")
     @Produces({ "application/json" })
-    @ApiOperation(value = "Get a single plant type.", notes = "Retrieves a single plant type based on a given ID.", response = GenPlantType.class, tags={  })
+    @ApiOperation(value = "Get a single plant type.", notes = "Retrieves a single plant type based on a given ID.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = GenPlantType.class),
         @ApiResponse(code = 404, message = "No plant type with the given ID was found.", response = GenErrorMessage.class),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response plantTypePlantTypeIdGet(@PathParam("plantTypeId") @ApiParam("ID of the plant type to access.") String plantTypeId) {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class) })
+    GenPlantType plantTypePlantTypeIdGet(@PathParam("plantTypeId") @ApiParam("ID of the plant type to access.") String plantTypeId);
 
     @POST
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    @ApiOperation(value = "Post a plant type.", notes = "Create a new plant type.", response = Void.class, tags={  })
+    @ApiOperation(value = "Post a plant type.", notes = "Create a new plant type.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "OK", response = Void.class),
         @ApiResponse(code = 400, message = "The given plant type was invalid.", response = GenErrorMessage.class),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response plantTypePost(@Valid GenPlantTypePayload genPlantTypePayload) {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class) })
+    void plantTypePost(@Valid GenPlantTypePayload genPlantTypePayload);
 }

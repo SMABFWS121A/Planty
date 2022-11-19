@@ -19,70 +19,55 @@ import javax.validation.Valid;
 @Path("/sensor")
 @Api(description = "the sensor API")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen")
-public class SensorApi {
+public interface SensorApi {
 
     @GET
     @Produces({ "application/json" })
-    @ApiOperation(value = "Get all sensors.", notes = "Retrieves all available sensors.", response = GenSensor.class, responseContainer = "List", tags={  })
+    @ApiOperation(value = "Get all sensors.", notes = "Retrieves all available sensors.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = GenSensor.class, responseContainer = "List"),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response sensorGet() {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class, responseContainer = "List") })
+    List<GenSensor> sensorGet();
 
     @POST
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    @ApiOperation(value = "Post a sensor.", notes = "Create a new sensor.", response = Void.class, tags={  })
+    @ApiOperation(value = "Post a sensor.", notes = "Create a new sensor.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "OK", response = Void.class),
         @ApiResponse(code = 400, message = "The given sensor was invalid.", response = GenErrorMessage.class),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response sensorPost(@Valid GenSensorPayload genSensorPayload) {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class) })
+    void sensorPost(@Valid GenSensorPayload genSensorPayload);
 
     @DELETE
     @Path("/{sensorId}")
     @Produces({ "application/json" })
-    @ApiOperation(value = "Delete a single sensor.", notes = "Deletes a single sensor based on a given ID.", response = Void.class, tags={  })
+    @ApiOperation(value = "Delete a single sensor.", notes = "Deletes a single sensor based on a given ID.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = Void.class),
         @ApiResponse(code = 404, message = "No sensor with the given ID was found.", response = GenErrorMessage.class),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response sensorSensorIdDelete(@PathParam("sensorId") @ApiParam("ID of the sensor to access.") String sensorId) {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class) })
+    void sensorSensorIdDelete(@PathParam("sensorId") @ApiParam("ID of the sensor to access.") String sensorId);
 
     @GET
     @Path("/{sensorId}")
     @Produces({ "application/json" })
-    @ApiOperation(value = "Get a single sensor.", notes = "Retrieves a single sensor based on a given ID.", response = GenSensor.class, tags={  })
+    @ApiOperation(value = "Get a single sensor.", notes = "Retrieves a single sensor based on a given ID.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = GenSensor.class),
         @ApiResponse(code = 404, message = "No sensor with the given ID was found.", response = GenErrorMessage.class),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response sensorSensorIdGet(@PathParam("sensorId") @ApiParam("ID of the sensor to access.") String sensorId) {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class) })
+    GenSensor sensorSensorIdGet(@PathParam("sensorId") @ApiParam("ID of the sensor to access.") String sensorId);
 
     @PUT
     @Path("/{sensorId}")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    @ApiOperation(value = "Put a single sensor.", notes = "Updates a sensors configuration.", response = Void.class, tags={  })
+    @ApiOperation(value = "Put a single sensor.", notes = "Updates a sensors configuration.", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "OK", response = Void.class),
         @ApiResponse(code = 400, message = "The given sensor was invalid.", response = GenErrorMessage.class),
         @ApiResponse(code = 404, message = "No sensor with the given ID was found.", response = GenErrorMessage.class),
-        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class)
-    })
-    public Response sensorSensorIdPut(@PathParam("sensorId") @ApiParam("ID of the sensor to access.") String sensorId,@Valid GenSensorConfigurationPayload genSensorConfigurationPayload) {
-        return Response.ok().entity("magic!").build();
-    }
+        @ApiResponse(code = 503, message = "The service is unavailable.", response = GenErrorMessage.class) })
+    void sensorSensorIdPut(@PathParam("sensorId") @ApiParam("ID of the sensor to access.") String sensorId,@Valid GenSensorConfigurationPayload genSensorConfigurationPayload);
 }

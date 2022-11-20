@@ -1,2 +1,16 @@
+<!-- <h1>Plant 1</h1>
+<app-line-chart [plantName]="'NicePlant'"></app-line-chart> -->
 <h1>Plant 1</h1>
-<app-line-chart [plantName]="'NicePlant'"></app-line-chart>
+<div class="grid grid-cols-2 gap-2">
+  <div>
+    <app-line-chart [plantName]="'NicePlant'"></app-line-chart>
+  </div>
+  <div>
+    <app-line-chart [plantName]="'Plant'"></app-line-chart>
+  </div>
+  <div class="mt-10">
+    <h1>Plant 2</h1>
+    <app-line-chart [plantName]="'NicePlant'"></app-line-chart>
+  </div>
+  <div>02</div>
+</div>

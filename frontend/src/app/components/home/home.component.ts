@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LineChartComponent } from '../line-chart/line-chart.component';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +7,13 @@ import { LineChartComponent } from '../line-chart/line-chart.component';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  plants: any;
 
-  ngOnInit(): void {}
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit(): void {
+    this.apiService.getPlants().subscribe((result) => {
+      this.plants = result;
+    });
+  }
 }

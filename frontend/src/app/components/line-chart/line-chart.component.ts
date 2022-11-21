@@ -9,22 +9,20 @@ Chart.register(...registerables);
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit {
-  @Input() plantName: string = 'PlantTestName';
-
-  constructor(private apiService: ApiService) {}
-
-  chartData: any;
-
+  @Input() plantName: string = '';
+  plantData: any;
   lableData: any[] = [];
   moistureData: any[] = [];
 
+  constructor(private apiService: ApiService) {}
+
   ngOnInit(): void {
     this.apiService.getPlantInfo().subscribe((result) => {
-      this.chartData = result;
-      if (this.chartData != null) {
-        for (let i = 0; i < this.chartData.length; i++) {
-          this.lableData.push(this.chartData[i].date);
-          this.moistureData.push(this.chartData[i].moistureLevel);
+      this.plantData = result;
+      if (this.plantData != null) {
+        for (let i = 0; i < this.plantData.length; i++) {
+          this.lableData.push(this.plantData[i].date);
+          this.moistureData.push(this.plantData[i].moistureLevel);
         }
         this.renderChart(this.lableData, this.moistureData);
       }
@@ -32,7 +30,7 @@ export class LineChartComponent implements OnInit {
   }
 
   renderChart(lableData: any, moistureData: any) {
-    new Chart('lineChart', {
+    new Chart(this.plantName + 'line', {
       type: 'line',
       data: {
         labels: lableData,
@@ -44,16 +42,16 @@ export class LineChartComponent implements OnInit {
           },
         ],
       },
-      // options: {
-      //   scales: {
-      //     y: {
-      //       beginAtZero: true,
-      //     },
-      //     x: {
-      //       beginAtZero: true,
-      //     },
-      //   },
-      // },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+          //     x: {
+          //       beginAtZero: true,
+          //     },
+        },
+      },
     });
   }
 }

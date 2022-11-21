@@ -16,4 +16,8 @@ export class ApiService {
   getPlantInfo() {
     return this.http.get('http://localhost:3000/plant1Data');
   }
+
+  getPlants() {
+    return this.http.get('http://localhost:3000/plants');
+  }
 }

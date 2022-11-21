@@ -23,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     MangementFormComponent,
     ManagementTableComponent,
     LineChartComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,

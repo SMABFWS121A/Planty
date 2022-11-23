@@ -1,12 +1,9 @@
 package de.planty.gen.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -33,7 +30,6 @@ public class GenPlantPayload   {
   }
 
   
-  @ApiModelProperty(example = "Sensor 1", value = "A name of an entity")
   @JsonProperty("name")
  @Size(max=50)  public String getName() {
     return name;
@@ -53,7 +49,6 @@ public class GenPlantPayload   {
   }
 
   
-  @ApiModelProperty(example = "The blue ESP32 sensor", value = "A description of an entity")
   @JsonProperty("description")
  @Size(max=50)  public String getDescription() {
     return description;
@@ -74,7 +69,6 @@ public class GenPlantPayload   {
   }
 
   
-  @ApiModelProperty(example = "420", value = "The ID schema used for most database entities.")
   @JsonProperty("plantTypeId")
  @Min(0)  public Integer getPlantTypeId() {
     return plantTypeId;
@@ -95,7 +89,6 @@ public class GenPlantPayload   {
   }
 
   
-  @ApiModelProperty(example = "420", value = "The ID schema used for most database entities.")
   @JsonProperty("sensorId")
  @Min(0)  public Integer getSensorId() {
     return sensorId;
@@ -116,7 +109,6 @@ public class GenPlantPayload   {
   }
 
   
-  @ApiModelProperty(example = "420", value = "The ID schema used for most database entities.")
   @JsonProperty("roomId")
  @Min(0)  public Integer getRoomId() {
     return roomId;

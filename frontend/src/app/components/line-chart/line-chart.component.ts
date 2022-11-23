@@ -43,10 +43,12 @@ export class LineChartComponent implements OnInit {
         ],
       },
       options: {
+        responsive: true,
         scales: {
           y: {
             beginAtZero: true,
           },
+
           //     x: {
           //       beginAtZero: true,
           //     },

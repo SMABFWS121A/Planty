@@ -26,16 +26,15 @@ export class PieChartComponent implements OnInit {
   }
 
   renderChart() {
-    console.log(this.plantName);
     new Chart(this.plantName + 'pie', {
       type: 'doughnut',
       data: {
-        labels: ['moist', 'dry'],
+        labels: ['moistlevel'],
         datasets: [
           {
             label: 'Percent',
             data: [this.moistureData * 10, 100 - this.moistureData * 10],
-            backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 99, 132)'],
+            backgroundColor: ['rgb(54, 162, 235)', 'rgb(211,211,211)'],
             hoverOffset: 4,
           },
         ],

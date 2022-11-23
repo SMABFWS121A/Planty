@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  isVisible: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClick() {
+    this.isVisible = !this.isVisible;
+  }
 }

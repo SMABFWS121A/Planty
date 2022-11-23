@@ -26,6 +26,7 @@
     <beanvalidation-version>2.0.2</beanvalidation-version>
     <jakarta.ws.rs-version>2.1.6</jakarta.ws.rs-version>
     <quarkus.hibernate.version>2.13.2.Final</quarkus.hibernate.version>
+    <quarkus.jdbc.postgres.version>2.13.2.Final</quarkus.jdbc.postgres.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -128,10 +129,16 @@
       <version>${beanvalidation-version}</version>
       <scope>provided</scope>
     </dependency>
+    <!-- Hibernate/Postgres -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-orm-panache</artifactId>
       <version>${quarkus.hibernate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+      <version>${quarkus.jdbc.postgres.version}</version>
     </dependency>
   </dependencies>
   <build>

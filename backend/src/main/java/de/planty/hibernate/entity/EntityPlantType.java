@@ -1,12 +1,14 @@
 package de.planty.hibernate.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.validation.Valid;
 
-public class EntityPlantType {
+public class EntityPlantType extends PanacheEntityBase {
 
     @Id
     @SequenceGenerator(name = "guidelineSequence", sequenceName = "guideline_id_seq", allocationSize = 1)

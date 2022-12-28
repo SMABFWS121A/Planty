@@ -1,13 +1,10 @@
 package de.planty.gen.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -34,7 +31,6 @@ public class GenMoistureRecord   {
   }
 
   
-  @ApiModelProperty(example = "420", value = "The ID schema used for most database entities.")
   @JsonProperty("id")
  @Min(0)  public Integer getId() {
     return id;
@@ -54,7 +50,6 @@ public class GenMoistureRecord   {
   }
 
   
-  @ApiModelProperty(value = "A timestamp containing date and time.")
   @JsonProperty("timestamp")
   public Date getTimestamp() {
     return timestamp;
@@ -76,7 +71,6 @@ public class GenMoistureRecord   {
   }
 
   
-  @ApiModelProperty(example = "69", value = "Humidity level reported by a sensor scaled from 0 to 100.")
   @JsonProperty("humidityLevel")
  @Min(0) @Max(100)  public Integer getHumidityLevel() {
     return humidityLevel;
@@ -97,7 +91,6 @@ public class GenMoistureRecord   {
   }
 
   
-  @ApiModelProperty(example = "420", value = "The ID schema used for most database entities.")
   @JsonProperty("plantId")
  @Min(0)  public Integer getPlantId() {
     return plantId;

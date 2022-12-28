@@ -2,7 +2,6 @@
 
 # Checks
 WD=$(pwd)
-echo "$WD"
 if [[ ! "$WD" == *"/openapi" ]]
 then
     echo "You must be inside the /openapi directory to run this script."
@@ -19,7 +18,7 @@ rm -rf ./.backend/* ./.frontend/*
 mkdir -p ./.backend ./.frontend
 
 # Generating backend
-echo '{ "hideGenerationTimestamp": true }"' > ./config.json
+echo '{ "hideGenerationTimestamp": true, "interfaceOnly": true, "useSwaggerAnnotations": false, "returnResponse": true }"' > ./config.json
 bin/openapi-generator.sh generate -i openapi.yaml -g jaxrs-spec --package-name "de.planty.gen" --api-package "de.planty.gen.api" --model-package "de.planty.gen.model" --model-name-prefix "Gen" -c ./config.json -o ./.backend
 rm ./config.json
 

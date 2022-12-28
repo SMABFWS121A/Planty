@@ -9,6 +9,7 @@ import de.planty.util.ErrorResponseBuilder;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 public class PlantApiImpl implements PlantApi {
@@ -78,7 +79,7 @@ public class PlantApiImpl implements PlantApi {
         EntityPlant entityPlant = PlantEntityMapper.getInstance().mapPayload(genPlantPayload);
         entityPlant.persist();
         return Response
-                .ok()
+                .created(URI.create(String.format("/plant/%d", entityPlant.getId())))
                 .build();
     }
 }

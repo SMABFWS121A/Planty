@@ -9,6 +9,7 @@ import de.planty.util.ErrorResponseBuilder;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 public class RoomApiImpl implements RoomApi {
@@ -28,7 +29,7 @@ public class RoomApiImpl implements RoomApi {
         EntityRoom entityRoom = RoomEntityMapper.getInstance().mapPayload(genRoomPayload);
         entityRoom.persist();
         return Response
-                .ok()
+                .created(URI.create(String.format("/room/%d", entityRoom.getId())))
                 .build();
     }
 

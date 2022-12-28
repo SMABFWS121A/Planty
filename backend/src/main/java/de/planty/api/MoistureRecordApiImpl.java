@@ -9,6 +9,7 @@ import de.planty.util.ErrorResponseBuilder;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 public class MoistureRecordApiImpl implements MoistureRecordApi {
@@ -42,7 +43,9 @@ public class MoistureRecordApiImpl implements MoistureRecordApi {
                     .build();
 
         entityMoistureRecord.delete();
-        return Response.ok().build();
+        return Response
+                .ok()
+                .build();
     }
 
     @Override
@@ -70,11 +73,12 @@ public class MoistureRecordApiImpl implements MoistureRecordApi {
     }
 
     @Override
+    @Transactional
     public Response moistureRecordPost(GenMoistureRecordPayload genMoistureRecordPayload) {
         EntityMoistureRecord entityMoistureRecord = MoistureRecordEntityMapper.getInstance().mapPayload(genMoistureRecordPayload);
         entityMoistureRecord.persist();
         return Response
-                .ok()
+                .created(URI.create(String.format("/moistureRecord/%d", entityMoistureRecord.getId())))
                 .build();
     }
 }

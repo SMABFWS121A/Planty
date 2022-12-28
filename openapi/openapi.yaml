@@ -33,7 +33,7 @@ paths:
               $ref: "#/components/schemas/moistureRecordPayload"
       responses:
         "201":
-          description: "OK"
+          description: "Created"
         "400":
           description: "The given moisture record was invalid."
           content:
@@ -135,7 +135,7 @@ paths:
               $ref: "#/components/schemas/plantPayload"
       responses:
         "201":
-          description: "OK"
+          description: "Created"
         "400":
           description: "The given plant was invalid."
           content:
@@ -237,7 +237,7 @@ paths:
               $ref: "#/components/schemas/plantTypePayload"
       responses:
         "201":
-          description: "OK"
+          description: "Created"
         "400":
           description: "The given plant type was invalid."
           content:
@@ -339,7 +339,7 @@ paths:
               $ref: "#/components/schemas/roomPayload"
       responses:
         "201":
-          description: "OK"
+          description: "Created"
         "400":
           description: "The given room was invalid."
           content:
@@ -441,7 +441,7 @@ paths:
               $ref: "#/components/schemas/sensorPayload"
       responses:
         "201":
-          description: "OK"
+          description: "Created"
         "400":
           description: "The given sensor was invalid."
           content:
@@ -524,7 +524,7 @@ paths:
             schema:
               $ref: "#/components/schemas/sensorConfigurationPayload"
       responses:
-        "201":
+        "200":
           description: "OK"
         "400":
           description: "The given sensor was invalid."

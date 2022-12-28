@@ -10,6 +10,7 @@ import de.planty.util.ErrorResponseBuilder;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class SensorApiImpl implements SensorApi {
         EntitySensor entitySensor = SensorEntityMapper.getInstance().mapPayload(genSensorPayload);
         entitySensor.persist();
         return Response
-                .ok()
+                .created(URI.create(String.format("/sensor/%d", entitySensor.getId())))
                 .build();
     }
 

@@ -1,0 +1,43 @@
+package de.planty.util;
+
+import org.jboss.resteasy.reactive.RestResponse;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+public class ErrorResponseBuilder {
+
+    private String message;
+    private int statusCode;
+
+    public ErrorResponseBuilder(String message, int statusCode){
+        this.message = message;
+        this.statusCode = statusCode;
+    }
+
+    public ErrorResponseBuilder(String message){
+        this(message, RestResponse.StatusCode.INTERNAL_SERVER_ERROR);
+    }
+
+    public ErrorResponseBuilder(){
+        this("No further information provided", RestResponse.StatusCode.INTERNAL_SERVER_ERROR);
+    }
+
+    public ErrorResponseBuilder setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public ErrorResponseBuilder setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+        return this;
+    }
+
+    public Response build() {
+        if(message == null || message.length() > 256) //As defined in OpenAPI configuration in schema "errorMessage"
+            throw new IllegalArgumentException("The message exceeds the maximum length of 256.");
+
+        return Response.status(statusCode).type(MediaType.APPLICATION_JSON).entity(String.format("{\"message\": \"%s\"}", message)).build();
+    }
+
+}

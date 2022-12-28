@@ -8,12 +8,20 @@ public class RoomEntityMapper extends EntityMapperBase<EntityRoom, GenRoom> {
     private static RoomEntityMapper roomEntityMapper;
 
     @Override
-    public GenRoom map(EntityRoom entity) {
+    public GenRoom mapPanacheEntity(EntityRoom panacheEntity) {
         GenRoom genRoom = new GenRoom();
-        genRoom.setId(entity.getId());
-        genRoom.setName(entity.getName());
-        genRoom.setDescription(entity.getDescription());
+        genRoom.setId(panacheEntity.getId());
+        genRoom.setName(panacheEntity.getName());
+        genRoom.setDescription(panacheEntity.getDescription());
         return genRoom;
+    }
+
+    @Override
+    public EntityRoom mapGenEntity(GenRoom genEntity) {
+        EntityRoom entityRoom = new EntityRoom();
+        entityRoom.setName(genEntity.getName());
+        entityRoom.setDescription(genEntity.getDescription());
+        return entityRoom;
     }
 
     public RoomEntityMapper getInstance() {

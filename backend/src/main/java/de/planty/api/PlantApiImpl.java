@@ -15,9 +15,10 @@ public class PlantApiImpl implements PlantApi {
 
     @Override
     public Response plantGet() {
-        List<EntityPlant> entityPlants = EntityPlant.listAll();
+        List<GenPlant> genPlants = PlantEntityMapper.getInstance().mapAllPanacheEntities(EntityPlant.listAll());
         return Response
-                .ok(PlantEntityMapper.getInstance().mapAllPanacheEntities(entityPlants))
+                .ok()
+                .entity(genPlants)
                 .build();
     }
 
@@ -66,7 +67,8 @@ public class PlantApiImpl implements PlantApi {
 
         GenPlant genPlant = PlantEntityMapper.getInstance().mapPanacheEntity(entityPlant);
         return Response
-                .ok(genPlant)
+                .ok()
+                .entity(genPlant)
                 .build();
     }
 
@@ -74,7 +76,7 @@ public class PlantApiImpl implements PlantApi {
     @Transactional
     public Response plantPost(GenPlantPayload genPlantPayload) {
         EntityPlant entityPlant = PlantEntityMapper.getInstance().mapPayload(genPlantPayload);
-        EntityPlant.persist(entityPlant);
+        entityPlant.persist();
         return Response
                 .ok()
                 .build();

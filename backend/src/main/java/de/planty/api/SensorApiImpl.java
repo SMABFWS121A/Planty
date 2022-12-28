@@ -1,35 +1,114 @@
 package de.planty.api;
 
 import de.planty.gen.api.SensorApi;
+import de.planty.gen.model.GenSensor;
 import de.planty.gen.model.GenSensorConfigurationPayload;
 import de.planty.gen.model.GenSensorPayload;
+import de.planty.hibernate.entity.EntitySensor;
+import de.planty.hibernate.mapper.SensorEntityMapper;
+import de.planty.util.ErrorResponseBuilder;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
+import java.util.Date;
+import java.util.List;
 
 public class SensorApiImpl implements SensorApi {
 
     @Override
     public Response sensorGet() {
-        return Response.ok().build();
+        List<GenSensor> genSensors = SensorEntityMapper.getInstance().mapAllPanacheEntities(EntitySensor.listAll());
+        return Response
+                .ok()
+                .entity(genSensors)
+                .build();
     }
 
     @Override
+    @Transactional
     public Response sensorPost(GenSensorPayload genSensorPayload) {
-        return Response.ok().build();
+        EntitySensor entitySensor = SensorEntityMapper.getInstance().mapPayload(genSensorPayload);
+        entitySensor.persist();
+        return Response
+                .ok()
+                .build();
     }
 
     @Override
+    @Transactional
     public Response sensorSensorIdDelete(String sensorId) {
-        return Response.ok().build();
+        int id;
+        try {
+            id = Integer.parseInt(sensorId);
+        } catch(NumberFormatException exception) {
+            return new ErrorResponseBuilder()
+                    .setMessage("sensorId could not be parsed to an integer value.")
+                    .build();
+        }
+
+        EntitySensor entitySensor = EntitySensor.findById(id);
+        if(entitySensor == null)
+            return new ErrorResponseBuilder()
+                    .setStatusCode(404)
+                    .setMessage(String.format("No plant found for plantId %s", sensorId))
+                    .build();
+
+        entitySensor.delete();
+        return Response
+                .ok()
+                .build();
     }
 
     @Override
     public Response sensorSensorIdGet(String sensorId) {
-        return Response.ok().build();
+        int id;
+        try {
+            id = Integer.parseInt(sensorId);
+        } catch(NumberFormatException exception) {
+            return new ErrorResponseBuilder()
+                    .setMessage("sensorId could not be parsed to an integer value.")
+                    .build();
+        }
+
+        EntitySensor entitySensor = EntitySensor.findById(id);
+        if(entitySensor == null)
+            return new ErrorResponseBuilder()
+                    .setStatusCode(404)
+                    .setMessage(String.format("No plant found for plantId %s", sensorId))
+                    .build();
+
+        GenSensor genSensor = SensorEntityMapper.getInstance().mapPanacheEntity(entitySensor);
+        return Response
+                .ok()
+                .entity(genSensor)
+                .build();
     }
 
     @Override
+    @Transactional
     public Response sensorSensorIdPut(String sensorId, GenSensorConfigurationPayload genSensorConfigurationPayload) {
-        return Response.ok().build();
+        int id;
+        try {
+            id = Integer.parseInt(sensorId);
+        } catch(NumberFormatException exception) {
+            return new ErrorResponseBuilder()
+                    .setMessage("sensorId could not be parsed to an integer value.")
+                    .build();
+        }
+
+        EntitySensor entitySensor = EntitySensor.findById(id);
+        if(entitySensor == null)
+            return new ErrorResponseBuilder()
+                    .setStatusCode(404)
+                    .setMessage(String.format("No plant found for plantId %s", sensorId))
+                    .build();
+
+        entitySensor.setHumidityScalingFrom(genSensorConfigurationPayload.getHumidityScalingFrom());
+        entitySensor.setHumidityScalingTo(genSensorConfigurationPayload.getHumidityScalingTo());
+        entitySensor.setSleepTimeout(genSensorConfigurationPayload.getSleepTimeout());
+        entitySensor.setLastCalibration(new Date());
+        return Response
+                .ok()
+                .build();
     }
 }

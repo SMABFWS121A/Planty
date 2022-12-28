@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "Planty API"
   description: "API for communication between frontend, microcontroller and backend."
-  version: 0.0.3
+  version: 0.0.4
 paths:
   # Moisture Record endpoint
   /moistureRecord:
@@ -160,6 +160,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "plantId could not be parsed to an integer value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
         "503":
           description: "The service is unavailable."
           content:
@@ -174,6 +180,12 @@ paths:
           description: "OK"
         "404":
           description: "No plant with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "plantId could not be parsed to an integer value."
           content:
             application/json:
               schema:
@@ -340,6 +352,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "roomId could not be parsed to an integer value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
         "503":
           description: "The service is unavailable."
           content:
@@ -354,6 +372,12 @@ paths:
           description: "OK"
         "404":
           description: "No room with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "roomId could not be parsed to an integer value."
           content:
             application/json:
               schema:
@@ -430,6 +454,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "sensorId could not be parsed to an integer value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
         "503":
           description: "The service is unavailable."
           content:
@@ -444,6 +474,12 @@ paths:
           description: "OK"
         "404":
           description: "No sensor with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "sensorId could not be parsed to an integer value."
           content:
             application/json:
               schema:
@@ -474,6 +510,12 @@ paths:
                 $ref: "#/components/schemas/errorMessage"
         "404":
           description: "No sensor with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "sensorId could not be parsed to an integer value."
           content:
             application/json:
               schema:

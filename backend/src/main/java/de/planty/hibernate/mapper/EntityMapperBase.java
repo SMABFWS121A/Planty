@@ -32,12 +32,4 @@ public abstract class EntityMapperBase<PE extends PanacheEntityBase, GEN, PAYLOA
         return panacheEntities;
     }
 
-    public List<PE> listAllPanacheEntities() {
-        return PE.listAll();
-    }
-
-    public List<GEN> listAllGenEntities() {
-        return mapAllPanacheEntities(PE.listAll());
-    }
-
 }

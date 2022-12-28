@@ -47,7 +47,7 @@ public class SensorEntityMapper extends EntityMapperBase<EntitySensor, GenSensor
         return entitySensor;
     }
 
-    public SensorEntityMapper getInstance() {
+    public static SensorEntityMapper getInstance() {
         if(sensorEntityMapper == null)
             sensorEntityMapper = new SensorEntityMapper();
         return sensorEntityMapper;

@@ -33,7 +33,7 @@ public class RoomEntityMapper extends EntityMapperBase<EntityRoom, GenRoom, GenR
         return entityRoom;
     }
 
-    public RoomEntityMapper getInstance() {
+    public static RoomEntityMapper getInstance() {
         if(roomEntityMapper == null)
             roomEntityMapper = new RoomEntityMapper();
         return roomEntityMapper;

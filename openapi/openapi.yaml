@@ -70,6 +70,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "moistureRecordId could not be parsed to an integer value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
         "503":
           description: "The service is unavailable."
           content:
@@ -84,6 +90,12 @@ paths:
           description: "OK"
         "404":
           description: "No moisture record with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "moistureRecordId could not be parsed to an integer value."
           content:
             application/json:
               schema:
@@ -262,6 +274,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "plantTypeId could not be parsed to an integer value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
         "503":
           description: "The service is unavailable."
           content:
@@ -276,6 +294,12 @@ paths:
           description: "OK"
         "404":
           description: "No plant type with the given ID was found."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "500":
+          description: "plantTypeId could not be parsed to an integer value."
           content:
             application/json:
               schema:
@@ -587,6 +611,8 @@ components:
       properties:
         humidityLevel:
           $ref: "#/components/schemas/humidityLevel"
+        plantId:
+          $ref: "#/components/schemas/entityId"
     # Plant-related schemas
     plant:
       type: object

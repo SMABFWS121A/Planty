@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen")
 public class GenMoistureRecordPayload   {
   private @Valid Integer humidityLevel;
+  private @Valid Integer plantId;
 
   /**
    * Humidity level reported by a sensor scaled from 0 to 100.
@@ -38,6 +39,26 @@ public class GenMoistureRecordPayload   {
     this.humidityLevel = humidityLevel;
   }
 
+  /**
+   * The ID schema used for most database entities.
+   * minimum: 0
+   **/
+  public GenMoistureRecordPayload plantId(Integer plantId) {
+    this.plantId = plantId;
+    return this;
+  }
+
+  
+  @JsonProperty("plantId")
+ @Min(0)  public Integer getPlantId() {
+    return plantId;
+  }
+
+  @JsonProperty("plantId")
+  public void setPlantId(Integer plantId) {
+    this.plantId = plantId;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -48,12 +69,13 @@ public class GenMoistureRecordPayload   {
       return false;
     }
     GenMoistureRecordPayload moistureRecordPayload = (GenMoistureRecordPayload) o;
-    return Objects.equals(this.humidityLevel, moistureRecordPayload.humidityLevel);
+    return Objects.equals(this.humidityLevel, moistureRecordPayload.humidityLevel) &&
+        Objects.equals(this.plantId, moistureRecordPayload.plantId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(humidityLevel);
+    return Objects.hash(humidityLevel, plantId);
   }
 
   @Override
@@ -62,6 +84,7 @@ public class GenMoistureRecordPayload   {
     sb.append("class GenMoistureRecordPayload {\n");
     
     sb.append("    humidityLevel: ").append(toIndentedString(humidityLevel)).append("\n");
+    sb.append("    plantId: ").append(toIndentedString(plantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,12 +1,9 @@
 package de.planty.gen.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -16,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * A json object containing a text message describing an error.
  **/
-@ApiModel(description = "A json object containing a text message describing an error.")
+
 @JsonTypeName("errorMessage")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen")
 public class GenErrorMessage   {
@@ -31,7 +28,6 @@ public class GenErrorMessage   {
   }
 
   
-  @ApiModelProperty(example = "The database is not responding.", value = "A message describing an error.")
   @JsonProperty("message")
  @Size(max=256)  public String getMessage() {
     return message;

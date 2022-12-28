@@ -1,12 +1,9 @@
 package de.planty.gen.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -32,7 +29,6 @@ public class GenRoom   {
   }
 
   
-  @ApiModelProperty(example = "420", value = "The ID schema used for most database entities.")
   @JsonProperty("id")
  @Min(0)  public Integer getId() {
     return id;
@@ -52,7 +48,6 @@ public class GenRoom   {
   }
 
   
-  @ApiModelProperty(example = "Sensor 1", value = "A name of an entity")
   @JsonProperty("name")
  @Size(max=50)  public String getName() {
     return name;
@@ -72,7 +67,6 @@ public class GenRoom   {
   }
 
   
-  @ApiModelProperty(example = "The blue ESP32 sensor", value = "A description of an entity")
   @JsonProperty("description")
  @Size(max=50)  public String getDescription() {
     return description;

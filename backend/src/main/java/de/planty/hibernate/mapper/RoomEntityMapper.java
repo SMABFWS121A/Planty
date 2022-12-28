@@ -1,9 +1,10 @@
 package de.planty.hibernate.mapper;
 
 import de.planty.gen.model.GenRoom;
+import de.planty.gen.model.GenRoomPayload;
 import de.planty.hibernate.entity.EntityRoom;
 
-public class RoomEntityMapper extends EntityMapperBase<EntityRoom, GenRoom> {
+public class RoomEntityMapper extends EntityMapperBase<EntityRoom, GenRoom, GenRoomPayload> {
 
     private static RoomEntityMapper roomEntityMapper;
 
@@ -21,6 +22,14 @@ public class RoomEntityMapper extends EntityMapperBase<EntityRoom, GenRoom> {
         EntityRoom entityRoom = new EntityRoom();
         entityRoom.setName(genEntity.getName());
         entityRoom.setDescription(genEntity.getDescription());
+        return entityRoom;
+    }
+
+    @Override
+    public EntityRoom mapPayload(GenRoomPayload payload) {
+        EntityRoom entityRoom = new EntityRoom();
+        entityRoom.setName(payload.getName());
+        entityRoom.setDescription(payload.getDescription());
         return entityRoom;
     }
 

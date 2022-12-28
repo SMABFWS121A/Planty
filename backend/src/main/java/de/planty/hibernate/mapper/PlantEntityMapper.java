@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PlantEntityMapper extends EntityMapperBase<EntityPlant, GenPlant> {
 
-    private PlantEntityMapper plantEntityMapper;
+    private static PlantEntityMapper plantEntityMapper;
 
     @Override
     public GenPlant map(EntityPlant entity) {
@@ -22,8 +22,7 @@ public class PlantEntityMapper extends EntityMapperBase<EntityPlant, GenPlant> {
         return genPlant;
     }
 
-    @Override
-    public EntityMapperBase<EntityPlant, GenPlant> getInstance() {
+    public static PlantEntityMapper getInstance() {
         if(plantEntityMapper == null)
             plantEntityMapper = new PlantEntityMapper();
         return plantEntityMapper;

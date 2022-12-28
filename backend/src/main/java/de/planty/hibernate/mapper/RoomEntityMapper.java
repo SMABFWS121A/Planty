@@ -5,7 +5,7 @@ import de.planty.hibernate.entity.EntityRoom;
 
 public class RoomEntityMapper extends EntityMapperBase<EntityRoom, GenRoom> {
 
-    private RoomEntityMapper roomEntityMapper;
+    private static RoomEntityMapper roomEntityMapper;
 
     @Override
     public GenRoom map(EntityRoom entity) {
@@ -16,8 +16,7 @@ public class RoomEntityMapper extends EntityMapperBase<EntityRoom, GenRoom> {
         return genRoom;
     }
 
-    @Override
-    public EntityMapperBase<EntityRoom, GenRoom> getInstance() {
+    public RoomEntityMapper getInstance() {
         if(roomEntityMapper == null)
             roomEntityMapper = new RoomEntityMapper();
         return roomEntityMapper;

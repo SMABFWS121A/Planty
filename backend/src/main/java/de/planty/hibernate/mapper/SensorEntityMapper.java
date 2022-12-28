@@ -5,7 +5,7 @@ import de.planty.hibernate.entity.EntitySensor;
 
 public class SensorEntityMapper extends EntityMapperBase<EntitySensor, GenSensor> {
 
-    private SensorEntityMapper sensorEntityMapper;
+    private static SensorEntityMapper sensorEntityMapper;
 
     @Override
     public GenSensor map(EntitySensor entity) {
@@ -20,8 +20,7 @@ public class SensorEntityMapper extends EntityMapperBase<EntitySensor, GenSensor
         return genSensor;
     }
 
-    @Override
-    public EntityMapperBase<EntitySensor, GenSensor> getInstance() {
+    public SensorEntityMapper getInstance() {
         if(sensorEntityMapper == null)
             sensorEntityMapper = new SensorEntityMapper();
         return sensorEntityMapper;

@@ -20,5 +20,4 @@ public abstract class EntityMapperBase<I extends PanacheEntityBase, O> {
         return mapAll(I.listAll());
     }
 
-    public abstract EntityMapperBase<I, O> getInstance();
 }

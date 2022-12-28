@@ -1,12 +1,9 @@
 package de.planty.gen.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,7 +28,6 @@ public class GenSensorConfigurationPayload   {
   }
 
   
-  @ApiModelProperty(value = "The minimum value used for scaling the raw sensor values.")
   @JsonProperty("humidityScalingFrom")
   public Integer getHumidityScalingFrom() {
     return humidityScalingFrom;
@@ -51,7 +47,6 @@ public class GenSensorConfigurationPayload   {
   }
 
   
-  @ApiModelProperty(value = "The maximum value used for scaling the raw sensor values.")
   @JsonProperty("humidityScalingTo")
   public Integer getHumidityScalingTo() {
     return humidityScalingTo;
@@ -71,7 +66,6 @@ public class GenSensorConfigurationPayload   {
   }
 
   
-  @ApiModelProperty(value = "Timeout in minutes for the sensor to sleep in between taking measurements")
   @JsonProperty("sleepTimeout")
   public Integer getSleepTimeout() {
     return sleepTimeout;

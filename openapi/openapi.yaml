@@ -106,6 +106,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/errorMessage"
+  /moistureRecord/byPlant/{plantId}:
+    parameters:
+      - name: plantId
+        description: "ID of the plant to filter the moisture records for."
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: "Get all moisture records associated with the given plant."
+      description: "Retrieves all available moisture records associated with the given plant."
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/moistureRecords"
+        "500":
+          description: "plantId could not be parsed to an integer value."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+        "503":
+          description: "The service is unavailable."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
   # Plant endpoint
   /plant:
     get:

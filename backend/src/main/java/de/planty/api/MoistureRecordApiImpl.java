@@ -66,9 +66,11 @@ public class MoistureRecordApiImpl implements MoistureRecordApi {
                     .setMessage(String.format("No moisture record found for moistureRecordId %s", moistureRecordId))
                     .build();
 
+        GenMoistureRecord genMoistureRecord = MoistureRecordEntityMapper.getInstance().mapPanacheEntity(entityMoistureRecord);
+
         return Response
                 .ok()
-                .entity(entityMoistureRecord)
+                .entity(genMoistureRecord)
                 .build();
     }
 
@@ -79,6 +81,24 @@ public class MoistureRecordApiImpl implements MoistureRecordApi {
         entityMoistureRecord.persist();
         return Response
                 .created(URI.create(String.format("/moistureRecord/%d", entityMoistureRecord.getId())))
+                .build();
+    }
+
+    @Override
+    public Response moistureRecordByPlantPlantIdGet(String plantId) {
+        int id;
+        try {
+            id = Integer.parseInt(plantId);
+        } catch(NumberFormatException exception) {
+            return new ErrorResponseBuilder()
+                    .setMessage("plantId could not be parsed to an integer value.")
+                    .build();
+        }
+
+        List<GenMoistureRecord> genMoistureRecords = MoistureRecordEntityMapper.getInstance().mapAllPanacheEntities(EntityMoistureRecord.list("plantId", id));
+        return Response
+                .ok()
+                .entity(genMoistureRecords)
                 .build();
     }
 }

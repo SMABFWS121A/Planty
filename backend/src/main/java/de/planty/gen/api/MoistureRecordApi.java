@@ -19,6 +19,11 @@ import javax.validation.Valid;
 public interface MoistureRecordApi {
 
     @GET
+    @Path("/byPlant/{plantId}")
+    @Produces({ "application/json" })
+    Response moistureRecordByPlantPlantIdGet(@PathParam("plantId") String plantId);
+
+    @GET
     @Produces({ "application/json" })
     Response moistureRecordGet();
 

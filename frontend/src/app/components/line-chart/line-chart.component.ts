@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Chart, registerables } from 'node_modules/chart.js';
 import { ApiService } from 'src/app/services/api.service';
+import { DefaultService } from 'src/assets/ts-api-client';
 Chart.register(...registerables);
 
 @Component({
@@ -9,12 +10,16 @@ Chart.register(...registerables);
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit {
-  @Input() plantName: string = '';
+  @Input() plantID: string = '';
   plantData: any;
   lableData: any[] = [];
   moistureData: any[] = [];
+  plantName: string = '';
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private defaultService: DefaultService
+  ) {}
 
   ngOnInit(): void {
     this.apiService.getPlantInfo().subscribe((result) => {
@@ -26,6 +31,9 @@ export class LineChartComponent implements OnInit {
         }
         this.renderChart(this.lableData, this.moistureData);
       }
+    });
+    this.defaultService.plantPlantIdGet(this.plantID).subscribe((result) => {
+      this.plantName = result.name!;
     });
   }
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ApiService } from 'src/app/services/api.service';
+import { DefaultService } from 'src/assets/ts-api-client';
 
 @Component({
   selector: 'app-pie-chart',
@@ -8,11 +9,15 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./pie-chart.component.css'],
 })
 export class PieChartComponent implements OnInit {
-  @Input() plantName: string = '';
+  @Input() plantID: string = '';
   moistureData: number = NaN;
   plantData: any;
+  plantName: string = '';
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private defaultService: DefaultService
+  ) {}
 
   ngOnInit(): void {
     this.apiService.getPlantInfo().subscribe((result) => {
@@ -22,6 +27,9 @@ export class PieChartComponent implements OnInit {
           this.plantData[this.plantData.length - 1].moistureLevel;
         this.renderChart();
       }
+    });
+    this.defaultService.plantPlantIdGet(this.plantID).subscribe((result) => {
+      this.plantName = result.name!;
     });
   }
 

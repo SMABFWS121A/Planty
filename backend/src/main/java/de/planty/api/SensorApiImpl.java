@@ -51,7 +51,7 @@ public class SensorApiImpl implements SensorApi {
         if(entitySensor == null)
             return new ErrorResponseBuilder()
                     .setStatusCode(404)
-                    .setMessage(String.format("No plant found for plantId %s", sensorId))
+                    .setMessage(String.format("No sensor found for plantId %s", sensorId))
                     .build();
 
         entitySensor.delete();
@@ -75,7 +75,7 @@ public class SensorApiImpl implements SensorApi {
         if(entitySensor == null)
             return new ErrorResponseBuilder()
                     .setStatusCode(404)
-                    .setMessage(String.format("No plant found for plantId %s", sensorId))
+                    .setMessage(String.format("No sensor found for plantId %s", sensorId))
                     .build();
 
         GenSensor genSensor = SensorEntityMapper.getInstance().mapPanacheEntity(entitySensor);
@@ -101,7 +101,7 @@ public class SensorApiImpl implements SensorApi {
         if(entitySensor == null)
             return new ErrorResponseBuilder()
                     .setStatusCode(404)
-                    .setMessage(String.format("No plant found for plantId %s", sensorId))
+                    .setMessage(String.format("No sensor found for plantId %s", sensorId))
                     .build();
 
         entitySensor.setHumidityScalingFrom(genSensorConfigurationPayload.getHumidityScalingFrom());

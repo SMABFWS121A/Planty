@@ -20,7 +20,20 @@ curl -v -X POST -H "Content-Type: application/json" -d '{"name": "Betty", "descr
 curl -v -X POST -H "Content-Type: application/json" -d '{"name": "Cassandra", "description": "Cassandra is a proud tulip.", "plantTypeId": 2, "sensorId": 2, "roomId": 2}' http://localhost:8080/plant
 
 # Moisture Records
-curl -v -X POST -H "Content-Type: application/json" -d '{"humidityLevel": 50, "plantId": 1}' http://localhost:8080/moistureRecord
-curl -v -X POST -H "Content-Type: application/json" -d '{"humidityLevel": 42, "plantId": 2}' http://localhost:8080/moistureRecord
-
-echo "Posted 2 rooms, plant types, sensors, plants and moisture records to localhost:8080."
+for m in {1..9}
+do
+  for d in {10..28}
+  do
+    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-0'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 100))', "plantId": 1}' http://localhost:8080/moistureRecord
+    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-0'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 33 + 32))', "plantId": 2}' http://localhost:8080/moistureRecord
+  done
+done
+for m in {10..12}
+do
+  for d in {10..28}
+  do
+    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 100))', "plantId": 1}' http://localhost:8080/moistureRecord
+    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 33 + 32))', "plantId": 2}' http://localhost:8080/moistureRecord
+  done
+done
+echo "Posted 2 rooms, plant types, sensors, plants and a lot of moisture records to localhost:8080."

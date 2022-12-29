@@ -609,6 +609,8 @@ components:
     moistureRecordPayload:
       type: object
       properties:
+        timestamp:
+          $ref: "#/components/schemas/timestamp"
         humidityLevel:
           $ref: "#/components/schemas/humidityLevel"
         plantId:

@@ -13,6 +13,10 @@
 
 export interface MoistureRecordPayload { 
     /**
+     * A timestamp containing date and time.
+     */
+    timestamp?: Date;
+    /**
      * Humidity level reported by a sensor scaled from 0 to 100.
      */
     humidityLevel?: number;

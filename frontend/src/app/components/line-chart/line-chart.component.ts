@@ -22,16 +22,18 @@ export class LineChartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.getPlantInfo().subscribe((result) => {
-      this.plantData = result;
-      if (this.plantData != null) {
-        for (let i = 0; i < this.plantData.length; i++) {
-          this.lableData.push(this.plantData[i].date);
-          this.moistureData.push(this.plantData[i].moistureLevel);
+    this.defaultService
+      .moistureRecordByPlantPlantIdGet(this.plantID)
+      .subscribe((result) => {
+        this.plantData = result;
+        if (this.plantData != null) {
+          for (let i = 0; i < this.plantData.length; i++) {
+            this.lableData.push(this.plantData[i].timestamp);
+            this.moistureData.push(this.plantData[i].humidity_level);
+          }
+          this.renderChart(this.lableData, this.moistureData);
         }
-        this.renderChart(this.lableData, this.moistureData);
-      }
-    });
+      });
     this.defaultService.plantPlantIdGet(this.plantID).subscribe((result) => {
       this.plantName = result.name!;
     });

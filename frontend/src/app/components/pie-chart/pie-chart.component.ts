@@ -20,14 +20,16 @@ export class PieChartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.getPlantInfo().subscribe((result) => {
-      this.plantData = result;
-      if (this.plantData != null) {
-        this.moistureData =
-          this.plantData[this.plantData.length - 1].moistureLevel;
-        this.renderChart();
-      }
-    });
+    this.defaultService
+      .moistureRecordByPlantPlantIdGet(this.plantID)
+      .subscribe((result) => {
+        this.plantData = result;
+        if (this.plantData != null) {
+          this.moistureData =
+            this.plantData[this.plantData.length - 1].humidity_level;
+          this.renderChart();
+        }
+      });
     this.defaultService.plantPlantIdGet(this.plantID).subscribe((result) => {
       this.plantName = result.name!;
     });

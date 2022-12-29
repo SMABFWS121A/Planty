@@ -29,7 +29,7 @@ export class LineChartComponent implements OnInit {
         if (this.plantData != null) {
           for (let i = 0; i < this.plantData.length; i++) {
             this.lableData.push(this.plantData[i].timestamp);
-            this.moistureData.push(this.plantData[i].humidity_level);
+            this.moistureData.push(this.plantData[i].humidityLevel);
           }
           this.renderChart(this.lableData, this.moistureData);
         }
@@ -49,6 +49,8 @@ export class LineChartComponent implements OnInit {
             label: this.plantName,
             data: moistureData,
             borderWidth: 1,
+            fill: 'start',
+            backgroundColor: 'rgba(39, 131, 245, 0.27)',
           },
         ],
       },
@@ -57,6 +59,7 @@ export class LineChartComponent implements OnInit {
         scales: {
           y: {
             beginAtZero: true,
+            max: 100,
           },
 
           //     x: {

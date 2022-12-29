@@ -26,7 +26,7 @@ export class PieChartComponent implements OnInit {
         this.plantData = result;
         if (this.plantData != null) {
           this.moistureData =
-            this.plantData[this.plantData.length - 1].humidity_level;
+            this.plantData[this.plantData.length - 1].humidityLevel;
           this.renderChart();
         }
       });

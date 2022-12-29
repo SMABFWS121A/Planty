@@ -1,9 +1,12 @@
 package de.planty.hibernate.mapper;
 
 import de.planty.gen.model.GenSensor;
+import de.planty.gen.model.GenSensorPayload;
 import de.planty.hibernate.entity.EntitySensor;
 
-public class SensorEntityMapper extends EntityMapperBase<EntitySensor, GenSensor> {
+import java.util.Date;
+
+public class SensorEntityMapper extends EntityMapperBase<EntitySensor, GenSensor, GenSensorPayload> {
 
     private static SensorEntityMapper sensorEntityMapper;
 
@@ -32,7 +35,19 @@ public class SensorEntityMapper extends EntityMapperBase<EntitySensor, GenSensor
         return entitySensor;
     }
 
-    public SensorEntityMapper getInstance() {
+    @Override
+    public EntitySensor mapPayload(GenSensorPayload payload) {
+        EntitySensor entitySensor = new EntitySensor();
+        entitySensor.setName(payload.getName());
+        entitySensor.setDescription(payload.getDescription());
+        entitySensor.setHumidityScalingFrom(0);
+        entitySensor.setHumidityScalingTo(100);
+        entitySensor.setLastCalibration(new Date(0));
+        entitySensor.setSleepTimeout(60);
+        return entitySensor;
+    }
+
+    public static SensorEntityMapper getInstance() {
         if(sensorEntityMapper == null)
             sensorEntityMapper = new SensorEntityMapper();
         return sensorEntityMapper;

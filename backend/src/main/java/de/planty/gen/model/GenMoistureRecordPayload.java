@@ -1,6 +1,7 @@
 package de.planty.gen.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.Date;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
@@ -15,7 +16,28 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("moistureRecordPayload")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen")
 public class GenMoistureRecordPayload   {
+  private @Valid Date timestamp;
   private @Valid Integer humidityLevel;
+  private @Valid Integer plantId;
+
+  /**
+   * A timestamp containing date and time.
+   **/
+  public GenMoistureRecordPayload timestamp(Date timestamp) {
+    this.timestamp = timestamp;
+    return this;
+  }
+
+  
+  @JsonProperty("timestamp")
+  public Date getTimestamp() {
+    return timestamp;
+  }
+
+  @JsonProperty("timestamp")
+  public void setTimestamp(Date timestamp) {
+    this.timestamp = timestamp;
+  }
 
   /**
    * Humidity level reported by a sensor scaled from 0 to 100.
@@ -38,6 +60,26 @@ public class GenMoistureRecordPayload   {
     this.humidityLevel = humidityLevel;
   }
 
+  /**
+   * The ID schema used for most database entities.
+   * minimum: 0
+   **/
+  public GenMoistureRecordPayload plantId(Integer plantId) {
+    this.plantId = plantId;
+    return this;
+  }
+
+  
+  @JsonProperty("plantId")
+ @Min(0)  public Integer getPlantId() {
+    return plantId;
+  }
+
+  @JsonProperty("plantId")
+  public void setPlantId(Integer plantId) {
+    this.plantId = plantId;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -48,12 +90,14 @@ public class GenMoistureRecordPayload   {
       return false;
     }
     GenMoistureRecordPayload moistureRecordPayload = (GenMoistureRecordPayload) o;
-    return Objects.equals(this.humidityLevel, moistureRecordPayload.humidityLevel);
+    return Objects.equals(this.timestamp, moistureRecordPayload.timestamp) &&
+        Objects.equals(this.humidityLevel, moistureRecordPayload.humidityLevel) &&
+        Objects.equals(this.plantId, moistureRecordPayload.plantId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(humidityLevel);
+    return Objects.hash(timestamp, humidityLevel, plantId);
   }
 
   @Override
@@ -61,7 +105,9 @@ public class GenMoistureRecordPayload   {
     StringBuilder sb = new StringBuilder();
     sb.append("class GenMoistureRecordPayload {\n");
     
+    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
     sb.append("    humidityLevel: ").append(toIndentedString(humidityLevel)).append("\n");
+    sb.append("    plantId: ").append(toIndentedString(plantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

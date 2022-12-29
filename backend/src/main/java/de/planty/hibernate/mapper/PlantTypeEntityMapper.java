@@ -1,10 +1,10 @@
 package de.planty.hibernate.mapper;
 
 import de.planty.gen.model.GenPlantType;
-import de.planty.hibernate.entity.EntityPlant;
+import de.planty.gen.model.GenPlantTypePayload;
 import de.planty.hibernate.entity.EntityPlantType;
 
-public class PlantTypeEntityMapper extends EntityMapperBase<EntityPlantType, GenPlantType> {
+public class PlantTypeEntityMapper extends EntityMapperBase<EntityPlantType, GenPlantType, GenPlantTypePayload> {
 
     private static PlantTypeEntityMapper plantTypeEntityMapper;
 
@@ -24,6 +24,15 @@ public class PlantTypeEntityMapper extends EntityMapperBase<EntityPlantType, Gen
         entityPlantType.setName(genEntity.getName());
         entityPlantType.setDescription(genEntity.getDescription());
         entityPlantType.setMinHumidityLevel(genEntity.getMinHumidityLevel());
+        return entityPlantType;
+    }
+
+    @Override
+    public EntityPlantType mapPayload(GenPlantTypePayload payload) {
+        EntityPlantType entityPlantType = new EntityPlantType();
+        entityPlantType.setName(payload.getName());
+        entityPlantType.setDescription(payload.getDescription());
+        entityPlantType.setMinHumidityLevel(payload.getMinHumidityLevel());
         return entityPlantType;
     }
 

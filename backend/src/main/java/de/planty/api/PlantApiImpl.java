@@ -4,24 +4,48 @@ import de.planty.gen.api.PlantApi;
 import de.planty.gen.model.GenPlant;
 import de.planty.gen.model.GenPlantPayload;
 import de.planty.hibernate.entity.EntityPlant;
-import de.planty.hibernate.mapper.EntityMapperBase;
 import de.planty.hibernate.mapper.PlantEntityMapper;
+import de.planty.util.ErrorResponseBuilder;
 
 import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.util.List;
 
 public class PlantApiImpl implements PlantApi {
 
     @Override
     public Response plantGet() {
-        return Response.ok().build();
+        List<GenPlant> genPlants = PlantEntityMapper.getInstance().mapAllPanacheEntities(EntityPlant.listAll());
+        return Response
+                .ok()
+                .entity(genPlants)
+                .build();
     }
 
     @Override
+    @Transactional
     public Response plantPlantIdDelete(String plantId) {
-        return Response.ok().build();
+        int id;
+        try {
+            id = Integer.parseInt(plantId);
+        } catch(NumberFormatException exception) {
+            return new ErrorResponseBuilder()
+                    .setMessage("plantId could not be parsed to an integer value.")
+                    .build();
+        }
+
+        EntityPlant entityPlant = EntityPlant.findById(id);
+        if(entityPlant == null)
+            return new ErrorResponseBuilder()
+                    .setStatusCode(404)
+                    .setMessage(String.format("No plant found for plantId %s", plantId))
+                    .build();
+
+        entityPlant.delete();
+        return Response
+                .ok()
+                .build();
     }
 
     @Override
@@ -29,32 +53,33 @@ public class PlantApiImpl implements PlantApi {
         int id;
         try {
             id = Integer.parseInt(plantId);
-        } catch (NumberFormatException exception)
-        {
-            return Response.status(500).entity("ID could not be parsed to an integer value").build();
+        } catch(NumberFormatException exception) {
+            return new ErrorResponseBuilder()
+                    .setMessage("plantId could not be parsed to an integer value.")
+                    .build();
         }
 
         EntityPlant entityPlant = EntityPlant.findById(id);
         if(entityPlant == null)
-            return Response.status(500).entity("No plant found for given ID").build();
+            return new ErrorResponseBuilder()
+                    .setStatusCode(404)
+                    .setMessage(String.format("No plant found for plantId %s", plantId))
+                    .build();
 
         GenPlant genPlant = PlantEntityMapper.getInstance().mapPanacheEntity(entityPlant);
-        return Response.ok(genPlant).build();
+        return Response
+                .ok()
+                .entity(genPlant)
+                .build();
     }
 
     @Override
     @Transactional
     public Response plantPost(GenPlantPayload genPlantPayload) {
-        GenPlant genPlant = new GenPlant();
-        genPlant.setId(0);
-        genPlant.setName(genPlantPayload.getName());
-        genPlant.setDescription(genPlantPayload.getDescription());
-        genPlant.setPlantTypeId(genPlantPayload.getPlantTypeId());
-        genPlant.setSensorId(genPlantPayload.getSensorId());
-        genPlant.setRoomId(genPlantPayload.getRoomId());
-
-        EntityPlant entityPlant = PlantEntityMapper.getInstance().mapGenEntity(genPlant);
-        EntityPlant.persist(entityPlant);
-        return Response.ok().build();
+        EntityPlant entityPlant = PlantEntityMapper.getInstance().mapPayload(genPlantPayload);
+        entityPlant.persist();
+        return Response
+                .created(URI.create(String.format("/plant/%d", entityPlant.getId())))
+                .build();
     }
 }

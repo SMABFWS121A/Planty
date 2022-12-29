@@ -3,14 +3,13 @@ package de.planty.hibernate.mapper;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
-public abstract class EntityMapperBase<PE extends PanacheEntityBase, GEN> {
+public abstract class EntityMapperBase<PE extends PanacheEntityBase, GEN, PAYLOAD> {
 
     public abstract GEN mapPanacheEntity(PE panacheEntity);
     public abstract PE mapGenEntity(GEN genEntity);
+    public abstract PE mapPayload(PAYLOAD payload);
 
     public List<GEN> mapAllPanacheEntities(List<PE> panacheEntities) {
         List<GEN> genEntities = new ArrayList<>();
@@ -26,12 +25,11 @@ public abstract class EntityMapperBase<PE extends PanacheEntityBase, GEN> {
         return panacheEntities;
     }
 
-    public List<PE> listAllPanacheEntities() {
-        return PE.listAll();
-    }
-
-    public List<GEN> listAllGenEntities() {
-        return mapAllPanacheEntities(PE.listAll());
+    public List<PE> mapAllPayloads(List<PAYLOAD> payloads) {
+        List<PE> panacheEntities = new ArrayList<>();
+        for (PAYLOAD payload : payloads)
+            panacheEntities.add(mapPayload(payload));
+        return panacheEntities;
     }
 
 }

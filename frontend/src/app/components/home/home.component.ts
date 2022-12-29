@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
+import { DefaultService } from 'src/assets/ts-api-client';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +9,10 @@ import { ApiService } from 'src/app/services/api.service';
 export class HomeComponent implements OnInit {
   plants: any;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private defaultService: DefaultService) {}
 
   ngOnInit(): void {
-    this.apiService.getPlants().subscribe((result) => {
+    this.defaultService.plantGet().subscribe((result) => {
       this.plants = result;
     });
   }

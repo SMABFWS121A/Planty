@@ -3,6 +3,9 @@ info:
   title: "Planty API"
   description: "API for communication between frontend, microcontroller and backend."
   version: 0.0.4
+servers:
+  - url: http://localhost:8080/
+    description: Local development server
 paths:
   # Moisture Record endpoint
   /moistureRecord:

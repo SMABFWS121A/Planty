@@ -24,8 +24,8 @@ for m in 01 02 03 04 05 06 07 08 09 10 11 12
 do
   for d in {10..28}
   do
-    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 100))', "plantId": 1}' http://localhost:8080/moistureRecord
-    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 33 + 32))', "plantId": 2}' http://localhost:8080/moistureRecord
+    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 100))', "plantId": 7}' http://localhost:8080/moistureRecord
+    curl -v -X POST -H "Content-Type: application/json" -d '{"timestamp": "2021-'$m'-'$d'T12:00:00Z", "humidityLevel": '$(($RANDOM % 33 + 32))', "plantId": 8}' http://localhost:8080/moistureRecord
   done
 done
 echo "Posted 2 rooms, plant types, sensors, plants and a lot of moisture records to localhost:8080."

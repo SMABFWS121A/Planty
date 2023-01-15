@@ -1,9 +1,10 @@
 #include <WiFi.h>
-#include <HTTPClient.h>
+#include <ESPAsyncWebServer.h>
 
-const char* ssid = "Wifi_SSID";
-const char* password = "Wifi_password";
-const char* serverUrl = "http://localhost:30566/post";
+const char* ssid = "your_SSID";
+const char* password = "your_password";
+
+int offset = 0;
 int pin = 32;
 int id = 123;
 
@@ -15,14 +16,27 @@ void setup() {
     Serial.println("Connecting to WiFi...");
   }
   Serial.println("Connected to WiFi");
+
+  AsyncWebServer server(80);
+  server.on("/offset", HTTP_GET, [](AsyncWebServerRequest *request){
+    String offsetString = request->getParam("offset")->value();
+    if (offsetString.toInt()) {
+      offset = offsetString.toInt();
+      request->send(200, "text/plain", "Offset saved successfully");
+    } else {
+      request->send(400, "text/plain", "Invalid offset value, must be an integer");
+    }
+  });
+  server.begin();
+  Serial.println("Server started");
 }
 
 void loop() {
-  int value = analogRead(pin);
+  int value = analogRead(pin) + offset;
   String body = "value=" + String(value) + "&id=" + String(id);
 
   HTTPClient http;
-  http.begin(serverUrl);
+  http.begin("http://example.com/post");
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
   int httpCode = http.POST(body);
 

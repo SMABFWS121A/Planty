@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { ApiService } from 'src/app/services/api.service';
+// import { ApiService } from 'src/app/services/api.service';
 import { DefaultService } from 'src/assets/ts-api-client';
 
 @Component({
@@ -10,16 +10,31 @@ import { DefaultService } from 'src/assets/ts-api-client';
 })
 export class PieChartComponent implements OnInit {
   @Input() plantID: string = '';
+  plant: any;
   moistureData: number = NaN;
   plantData: any;
   plantName: string = '';
 
   constructor(
-    private apiService: ApiService,
+    // private apiService: ApiService,
     private defaultService: DefaultService
   ) {}
 
   ngOnInit(): void {
+    // this.apiService
+    //   .moistureRecordByPlantPlantIdGet(this.plantID)
+    //   .subscribe((result) => {
+    //     this.plantData = result;
+    //     if (this.plantData != null) {
+    //       this.moistureData =
+    //         this.plantData[this.plantData.length - 1].humidityLevel;
+    //       this.renderChart();
+    //     }
+    //   });
+    // this.apiService.plantPlantIdGet(this.plantID).subscribe((result) => {
+    //   this.plant = result;
+    //   this.plantName = this.plant[0].name;
+    // });
     this.defaultService
       .moistureRecordByPlantPlantIdGet(this.plantID)
       .subscribe((result) => {
@@ -31,7 +46,8 @@ export class PieChartComponent implements OnInit {
         }
       });
     this.defaultService.plantPlantIdGet(this.plantID).subscribe((result) => {
-      this.plantName = result.name!;
+      this.plant = result;
+      this.plantName = this.plant.name;
     });
   }
 
@@ -43,7 +59,7 @@ export class PieChartComponent implements OnInit {
         datasets: [
           {
             label: 'Percent',
-            data: [this.moistureData * 10, 100 - this.moistureData * 10],
+            data: [this.moistureData, 100 - this.moistureData],
             backgroundColor: ['rgb(54, 162, 235)', 'rgb(211,211,211)'],
             hoverOffset: 4,
           },

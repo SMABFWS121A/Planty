@@ -13,11 +13,23 @@ export class ApiService {
     return this.http.get(this.baseURL + endPoint);
   }
 
-  getPlantInfo() {
-    return this.http.get('http://localhost:3000/plant1Data');
+  moistureRecordByPlantPlantIdGet(id: string) {
+    return this.http.get('http://localhost:3000/moistureRecordbyPlant' + id);
   }
 
-  getPlants() {
-    return this.http.get('http://localhost:3000/plants');
+  plantPlantIdGet(id: string) {
+    return this.http.get('http://localhost:3000/plant' + id);
+  }
+
+  sensorGet() {
+    return this.http.get('http://localhost:3000/sensor');
+  }
+
+  plantTypeGet() {
+    return this.http.get('http://localhost:3000/plantType');
+  }
+
+  plantGet() {
+    return this.http.get('http://localhost:3000/plant');
   }
 }

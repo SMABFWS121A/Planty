@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 // import { ApiService } from 'src/app/services/api.service';
-import {
-  DefaultService,
-  PlantPayload,
-  PlantTypePayload,
-  SensorPayload,
-} from 'src/assets/ts-api-client';
+import { DefaultService, PlantPayload } from 'src/assets/ts-api-client';
 
 @Component({
   selector: 'app-plant-management',
@@ -30,6 +25,7 @@ export class PlantManagementComponent implements OnInit {
     'description',
     'category',
     'sensor',
+    'delete',
   ];
   plants: any;
   sensors: any = [];
@@ -83,5 +79,13 @@ export class PlantManagementComponent implements OnInit {
       }
     }
     await this.defaultService.plantPost(this.plant).subscribe();
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    location.reload();
+  }
+
+  async deleteItem(data: any) {
+    await this.defaultService.plantPlantIdDelete(data.id).subscribe();
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    location.reload();
   }
 }

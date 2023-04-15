@@ -75,15 +75,29 @@
     </div>
 
     <div class="m-3">
-      <button
-        type="button"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-10 py-4 mt-8 ml-10 mr-5 w-3/4"
-        (click)="
-          savePlant(name.value, description.value, category.value, sensor.value)
-        "
-      >
-        Add Plant
-      </button>
+      <div class="flex justify-center pl-3">
+        <div class="mb-3 w-full">
+          <label
+            for="exampleFormControlInput1"
+            class="form-label inline-block mb-2 text-gray-700"
+            >Submit</label
+          >
+          <button
+            type="button"
+            class="bg-blue-500 hover:bg-blue-700 text-white text-base font-normal form-control block w-full px-3 py-3 mt-1 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0"
+            (click)="
+              savePlant(
+                name.value,
+                description.value,
+                category.value,
+                sensor.value
+              )
+            "
+          >
+            Add Plant
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

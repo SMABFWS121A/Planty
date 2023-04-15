@@ -10,9 +10,6 @@ import { DefaultService, PlantPayload } from 'src/assets/ts-api-client';
 })
 export class PlantManagementComponent implements OnInit {
   selectedFW = new FormControl();
-  visibility: string | undefined;
-  menuetype: string | undefined;
-  description: string | undefined;
 
   categoryNames: string[];
   sensorNames: string[];
